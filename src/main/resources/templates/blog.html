@@ -22,9 +22,20 @@
         </h2>
     </div>
 
-    <ol>
-        <li th:each="article : ${articles}" th:text="${article.title}"></li>
-    </ol>
+    <hr/>
+
+    <div th:each="article : ${articles}">
+        <h3 th:text="${article.title}"></h3>
+        <div th:text="${article.content}"></div>
+        <hr/>
+    </div>
+
+    <p>New Post</p>
+    <form action="#" th:action="@{/blog}" th:object="${article}" method="post">
+        <p>Title: <input type="text" th:field="*{title}"/></p>
+        <p>Content: <textarea th:field="*{content}"/></p>
+        <input type="submit" value="Submit"/>
+    </form>
 
 </main>
 <!-- /.container -->

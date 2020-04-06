@@ -1,25 +1,24 @@
 package biz.cosee.workshop.blogger.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class ArticleDto {
 
-    private final Long id;
+    private Long id;
 
-    private final String title;
-    private final String content;
-
-    @JsonCreator
-    @Builder
-    public ArticleDto(@JsonProperty("id") Long id, @JsonProperty("title") String title, @JsonProperty("content") String content) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-    }
+    private String title;
+    private String content;
 }
