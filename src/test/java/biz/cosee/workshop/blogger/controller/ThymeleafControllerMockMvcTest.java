@@ -32,8 +32,7 @@ class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
 
     @Test
     public void postArticle() throws Exception {
-        this.mockMvc
-                .perform(post("/blog")
+        mockMvc.perform(post("/blog")
                         .param("title", "The title")
                         .param("content", "The content.")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED))
@@ -41,5 +40,13 @@ class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
                 .andExpect(view().name("blog"))
                 .andExpect(model().attribute("articles", hasSize(3)))
                 .andExpect(model().attribute("articles", hasItem(equalTo(new ArticleDto(1L, "The title", "The content.")))));
+    }
+
+    @Test
+    public void deleteArticle() throws Exception {
+        mockMvc.perform(post("/blog/100"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("blog"))
+                .andExpect(model().attribute("articles", hasSize(1)));
     }
 }
