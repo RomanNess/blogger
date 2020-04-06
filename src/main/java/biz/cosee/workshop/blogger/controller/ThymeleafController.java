@@ -21,7 +21,7 @@ public class ThymeleafController {
 
     @GetMapping("/blog")
     public String blog(Model model) {
-        model.addAttribute("user", "John Done");
+        model.addAttribute("user", "John Doe");
         model.addAttribute("articles", articleService.getAll());
 
         model.addAttribute("article", new ArticleDto());
