@@ -10,7 +10,7 @@ import java.util.Arrays;
 @Controller
 public class ThymeleafController {
 
-    @GetMapping("/")
+    @GetMapping("/blog")
     public String main(Model model) {
         model.addAttribute("user", "John Doe");
         model.addAttribute("articles", Arrays.asList(
@@ -18,6 +18,6 @@ public class ThymeleafController {
                 ArticleDto.builder().id(0L).title("title2").content("content2").build()
         ));
 
-        return "index";
+        return "blog";
     }
 }
