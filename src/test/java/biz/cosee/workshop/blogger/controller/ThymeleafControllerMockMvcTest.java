@@ -36,6 +36,10 @@ class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
                         .param("title", "The title")
                         .param("content", "The content.")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/blog"));
+
+        mockMvc.perform(get("/blog"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("blog"))
                 .andExpect(model().attribute("articles", hasSize(3)))
@@ -45,6 +49,10 @@ class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
     @Test
     public void deleteArticle() throws Exception {
         mockMvc.perform(post("/blog/100"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/blog"));
+
+        mockMvc.perform(get("/blog"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("blog"))
                 .andExpect(model().attribute("articles", hasSize(1)));

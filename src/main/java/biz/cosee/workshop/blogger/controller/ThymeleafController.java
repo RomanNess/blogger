@@ -34,7 +34,7 @@ public class ThymeleafController {
 
         articleService.create(articleDto);
 
-        return blog(model);
+        return "redirect:/blog";
     }
 
     @PostMapping("/blog/{id}")
@@ -42,6 +42,6 @@ public class ThymeleafController {
 
         articleService.delete(articleId);
 
-        return blog(model);
+        return "redirect:/blog";
     }
 }
