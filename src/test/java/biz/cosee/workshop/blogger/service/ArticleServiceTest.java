@@ -14,9 +14,7 @@ class ArticleServiceTest extends AbstractSpringContextTest {
 
     @Test
     void insert() {
-        ArticleDto dto = new ArticleDto();
-        dto.setTitle("The title");
-        dto.setContent("The content.");
+        ArticleDto dto = ArticleDto.builder().title("The title").content("The content.").build();
 
         ArticleDto articleDto = articleService.create(dto);
         assertThat(articleDto).isNotNull();
