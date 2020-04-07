@@ -33,6 +33,12 @@ class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
     }
 
     @Test
+    void getArticlesWithoutUser() throws Exception {
+        mockMvc.perform(get("/blog"))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
     @WithMockUser(value = "test-user")
     public void postArticle() throws Exception {
         mockMvc.perform(post("/blog")
