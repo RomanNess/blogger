@@ -27,13 +27,19 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/blog/**")
-                .authenticated()
-                .antMatchers("/public")
-                .permitAll()
+        http
+                .formLogin()
+                .loginPage("/login")
+                .failureUrl("/login-error")
                 .and()
-                .httpBasic();
+                .logout()
+                .logoutSuccessUrl("/")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/blog/**").hasRole("USER")
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/403");
 
         http.csrf().disable();
     }
