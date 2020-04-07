@@ -24,6 +24,8 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BlogController {
 
+    //TODO when redirecting keep active tag and not only redirect to /blog without tag param.
+
     private final ArticleService articleService;
     private final List<TagDto> mockTags = List.of(
             new TagDto("foo"),

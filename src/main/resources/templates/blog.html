@@ -36,12 +36,12 @@
                         <div class="col-3 text-right">
                             <div style="float: left;">
                                 <form action="#" th:action="@{'/blog/update/{id}'(id=${article.id})}" th:method="get">
-                                    <button type="submit" class="btn-sm btn-warning">Update</button>
+                                    <button type="submit" class="btn-xsm btn-warning">edit</button>
                                 </form>
                             </div>
                             <div style="float: left; margin-left: 5px;">
                                 <form action="#" th:action="@{'/blog/delete/{id}'(id=${article.id})}" th:method="post">
-                                    <button type="submit" class="btn-sm btn-danger">Delete</button>
+                                    <button type="submit" class="btn-xsm btn-danger">X</button>
                                 </form>
                             </div>
                         </div>
@@ -59,10 +59,8 @@
             <div th:each="tag : ${allTags}">
                 <div style="display: inline; float: left; margin: 3px;">
                     <a th:href="@{/blog(tag=${tag.tagName})}">
-                        <button style="margin: 0; padding: 0; border-style: hidden; height: 0px;" type="submit">
-                            <span th:if="${activeTag != tag.tagName}" type="submit" class="badge badge-primary align-top" th:text="${tag.tagName}"></span>
-                            <span th:if="${activeTag == tag.tagName}" type="submit" class="badge badge-secondary align-top" th:text="${tag.tagName}"></span>
-                        </button>
+                        <button class="btn-xsm btn-dark align-top" type="submit" th:if="${activeTag != tag.tagName}" th:text="${tag.tagName}"></button>
+                        <button class="btn-xsm btn-info align-top" type="submit" th:if="${activeTag == tag.tagName}" th:text="${tag.tagName}"></button>
                     </a>
                 </div>
             </div>
