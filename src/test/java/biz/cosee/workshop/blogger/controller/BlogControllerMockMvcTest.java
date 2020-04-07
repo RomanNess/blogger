@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         @Sql(scripts = {"classpath:sql/articles.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
         @Sql(scripts = {"classpath:sql/cleanup.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD),
 })
-class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
+class BlogControllerMockMvcTest extends AbstractMockMvcTest {
 
     @SpyBean
     private ArticleService articleService;
@@ -58,7 +58,7 @@ class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
     @Test
     @WithMockUser(value = "test-user")
     public void postArticle() throws Exception {
-        mockMvc.perform(post("/blog")
+        mockMvc.perform(post("/blog/create")
                         .param("title", "The title")
                         .param("content", "The content.")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED))
@@ -75,7 +75,7 @@ class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
     @Test
     @WithMockUser(value = "test-user")
     public void deleteArticle() throws Exception {
-        mockMvc.perform(post("/blog/100"))
+        mockMvc.perform(post("/blog/delete/100"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/blog"));
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.unbescape.html.HtmlEscape;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +22,9 @@ import java.util.List;
 @Secured("ROLE_USER")
 @Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class ThymeleafController {
+public class BlogController {
 
     private final ArticleService articleService;
-
     private final List<TagDto> mockTags = List.of(
             new TagDto("foo"),
             new TagDto("bar"),
@@ -39,68 +39,46 @@ public class ThymeleafController {
             new TagDto("weed")
             );
 
-
     @GetMapping("/")
     public String blog() {
         return "redirect:/blog";
     }
 
     @GetMapping("/blog")
-    public String blog(Model model) {
+    public String blog(@RequestParam(value = "tag", required = false) String tagName, Model model) {
         model.addAttribute("articles", articleService.getAll());
-        model.addAttribute("article", new ArticleDto());    // initialize attribute for post
+        model.addAttribute("newArticle", new ArticleDto());    // initialize attribute for post
         model.addAttribute("allTags", mockTags);
-        model.addAttribute("activeTag", "");
+        model.addAttribute("activeTag", tagName);
         return "blog";
     }
 
-    @PostMapping("/blog")
+    @PostMapping("/blog/create")
     public String newArticle(@ModelAttribute("article") ArticleDto articleDto, Model model) {
 
         articleService.create(articleDto);
         return "redirect:/blog";
     }
 
-    @PostMapping("/blog/tag/{name}")
-    public String filterByTag(@PathVariable("name") String tagName, Model model) {
+    @GetMapping("/blog/update/{id}")
+    public String updateArticleView(@PathVariable("id") Long articleId, Model model) {
+
+        ArticleDto articleDto = articleService.get(articleId);
+        model.addAttribute("article", articleDto);
+        return "editarticle";
+    }
+
+    @PostMapping("/blog/update/{id}")
+    public String updateArticle(@PathVariable("id") Long articleId, @ModelAttribute("article") ArticleDto articleDto, Model model) {
+
+        articleService.update(articleId, articleDto);
         return "redirect:/blog";
     }
 
-    @PostMapping("/blog/{id}")
+    @PostMapping("/blog/delete/{id}")
     public String deleteArticle(@PathVariable("id") Long articleId, Model model) {
 
         articleService.delete(articleId);
         return "redirect:/blog";
-    }
-
-    @GetMapping("/login")
-    public String login(Model model) {
-        return "login";
-    }
-
-    @RequestMapping("/login-error")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "login";
-    }
-
-    @GetMapping("/error")
-    public String error(HttpServletRequest request, Model model) {
-        model.addAttribute("errorCode", "Error " + request.getAttribute("javax.servlet.error.status_code"));
-        Throwable throwable = (Throwable) request.getAttribute("javax.servlet.error.exception");
-        StringBuilder errorMessage = new StringBuilder();
-        errorMessage.append("<ul>");
-        while (throwable != null) {
-            errorMessage.append("<li>").append(HtmlEscape.escapeHtml5(throwable.getMessage())).append("</li>");
-            throwable = throwable.getCause();
-        }
-        errorMessage.append("</ul>");
-        model.addAttribute("errorMessage", errorMessage.toString());
-        return "error";
-    }
-
-    @GetMapping("/403")
-    public String forbidden() {
-        return "403";
     }
 }

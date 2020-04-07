@@ -23,7 +23,7 @@
         </div>
     </nav>
     <div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()" style="color:darkgray;">
-        Logged-in User: <span sec:authentication="name">user</span>
+        Logged in as: <span sec:authentication="name">user</span>
     </div>
 </body>
 </html>

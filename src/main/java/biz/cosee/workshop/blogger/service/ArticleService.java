@@ -42,6 +42,7 @@ public class ArticleService {
 
         ArticleEntity existingArticleEntity = articleRepository.getOne(id); // TODO: handle not found
         articleMapper.update(dto, existingArticleEntity);
+        existingArticleEntity.setLastUpdate(provideNow());
 
         ArticleEntity persistedArticleEntity = articleRepository.save(existingArticleEntity);
         return articleMapper.toDto(persistedArticleEntity);

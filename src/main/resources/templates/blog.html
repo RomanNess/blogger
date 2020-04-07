@@ -34,9 +34,16 @@
                             <span class="badge badge-secondary align-top" th:text="${article.lastUpdate}"></span>
                         </div>
                         <div class="col-3 text-right">
-                            <form action="#" th:action="@{'/blog/{id}'(id=${article.id})}" th:method="post">
-                                <button type="submit" class="btn-sm btn-danger">Delete</button>
-                            </form>
+                            <div style="float: left;">
+                                <form action="#" th:action="@{'/blog/update/{id}'(id=${article.id})}" th:method="get">
+                                    <button type="submit" class="btn-sm btn-warning">Update</button>
+                                </form>
+                            </div>
+                            <div style="float: left; margin-left: 5px;">
+                                <form action="#" th:action="@{'/blog/delete/{id}'(id=${article.id})}" th:method="post">
+                                    <button type="submit" class="btn-sm btn-danger">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="row col-12" th:text="${article.content}"></div>
@@ -51,12 +58,12 @@
 
             <div th:each="tag : ${allTags}">
                 <div style="display: inline; float: left; margin: 3px;">
-                    <form action="#" th:action="@{'/blog/tag/{name}'(name=${tag.tagName})}" th:method="post">
+                    <a th:href="@{/blog(tag=${tag.tagName})}">
                         <button style="margin: 0; padding: 0; border-style: hidden; height: 0px;" type="submit">
                             <span th:if="${activeTag != tag.tagName}" type="submit" class="badge badge-primary align-top" th:text="${tag.tagName}"></span>
                             <span th:if="${activeTag == tag.tagName}" type="submit" class="badge badge-secondary align-top" th:text="${tag.tagName}"></span>
                         </button>
-                    </form>
+                    </a>
                 </div>
             </div>
 
@@ -65,7 +72,7 @@
 
     <div style="margin-top: 35px;">
         <h3>Write a new blog post</h3>
-        <form action="#" th:action="@{/blog}" th:object="${article}" th:method="post">
+        <form action="#" th:action="@{/blog/create}" th:object="${newArticle}" th:method="post">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input id="title" type="text" class="form-control" th:field="*{title}"/>
