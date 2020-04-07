@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +23,7 @@ public class ThymeleafController {
         model.addAttribute("user", "John Doe");
         model.addAttribute("articles", articleService.getAll());
 
-        model.addAttribute("article", new ArticleDto());
+        model.addAttribute("article", new ArticleDto());    // initialize attribute for post
 
         return "blog";
     }
