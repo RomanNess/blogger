@@ -50,6 +50,7 @@ public class ThymeleafController {
         model.addAttribute("articles", articleService.getAll());
         model.addAttribute("article", new ArticleDto());    // initialize attribute for post
         model.addAttribute("allTags", mockTags);
+        model.addAttribute("activeTag", "");
         return "blog";
     }
 
@@ -57,6 +58,11 @@ public class ThymeleafController {
     public String newArticle(@ModelAttribute("article") ArticleDto articleDto, Model model) {
 
         articleService.create(articleDto);
+        return "redirect:/blog";
+    }
+
+    @PostMapping("/blog/tag/{name}")
+    public String filterByTag(@PathVariable("name") String tagName, Model model) {
         return "redirect:/blog";
     }
 

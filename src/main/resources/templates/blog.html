@@ -46,10 +46,20 @@
             </div>
         </div>
         <div class="col-3">
+
             <h3 class="h3 d-inline-block">Tag Cloud:</h3>
+
             <div th:each="tag : ${allTags}">
-                <div style="display: inline; float: left; margin: 3px;"><span class="badge badge-primary align-top" th:text="${tag.tagName}"></span></div>
+                <div style="display: inline; float: left; margin: 3px;">
+                    <form action="#" th:action="@{'/blog/tag/{name}'(name=${tag.tagName})}" th:method="post">
+                        <button style="margin: 0; padding: 0; border-style: hidden; height: 0px;" type="submit">
+                            <span th:if="${activeTag != tag.tagName}" type="submit" class="badge badge-primary align-top" th:text="${tag.tagName}"></span>
+                            <span th:if="${activeTag == tag.tagName}" type="submit" class="badge badge-secondary align-top" th:text="${tag.tagName}"></span>
+                        </button>
+                    </form>
+                </div>
             </div>
+
         </div>
     </div>
 
