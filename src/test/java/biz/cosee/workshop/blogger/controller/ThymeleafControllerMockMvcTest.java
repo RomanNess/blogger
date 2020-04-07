@@ -50,7 +50,7 @@ class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
     }
 
     @Test
-    void getArticlesWithoutUser() throws Exception {
+    void getArticlesWhenNotLoggedIn() throws Exception {
         mockMvc.perform(get("/blog"))
                 .andExpect(status().is3xxRedirection());
     }

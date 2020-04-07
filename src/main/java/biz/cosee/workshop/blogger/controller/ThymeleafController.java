@@ -31,7 +31,6 @@ public class ThymeleafController {
 
     @GetMapping("/blog")
     public String blog(Model model) {
-        model.addAttribute("user", "John Doe");
         model.addAttribute("articles", articleService.getAll());
         model.addAttribute("article", new ArticleDto());    // initialize attribute for post
         return "blog";
