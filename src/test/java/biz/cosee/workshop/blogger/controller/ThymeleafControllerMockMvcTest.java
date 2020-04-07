@@ -4,6 +4,7 @@ package biz.cosee.workshop.blogger.controller;
 import biz.cosee.workshop.blogger.dto.ArticleDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 
@@ -23,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
 
     @Test
+    @WithMockUser(value = "test-user")
     void getArticles() throws Exception {
         mockMvc.perform(get("/blog"))
                 .andExpect(status().isOk())
@@ -31,6 +33,7 @@ class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
     }
 
     @Test
+    @WithMockUser(value = "test-user")
     public void postArticle() throws Exception {
         mockMvc.perform(post("/blog")
                         .param("title", "The title")
@@ -47,6 +50,7 @@ class ThymeleafControllerMockMvcTest extends AbstractMockMvcTest {
     }
 
     @Test
+    @WithMockUser(value = "test-user")
     public void deleteArticle() throws Exception {
         mockMvc.perform(post("/blog/100"))
                 .andExpect(status().is3xxRedirection())

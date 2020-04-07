@@ -4,6 +4,7 @@ import biz.cosee.workshop.blogger.dto.ArticleDto;
 import biz.cosee.workshop.blogger.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +12,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
+@Secured("ROLE_USER")
 @Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ThymeleafController {
 
     private final ArticleService articleService;
+
+    @GetMapping("/")
+    public String blog() {
+        return "redirect:/blog";
+    }
 
     @GetMapping("/blog")
     public String blog(Model model) {
