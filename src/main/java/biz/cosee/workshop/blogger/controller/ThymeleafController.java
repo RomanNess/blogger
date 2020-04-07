@@ -1,6 +1,7 @@
 package biz.cosee.workshop.blogger.controller;
 
 import biz.cosee.workshop.blogger.dto.ArticleDto;
+import biz.cosee.workshop.blogger.dto.TagDto;
 import biz.cosee.workshop.blogger.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.unbescape.html.HtmlEscape;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Secured("ROLE_USER")
 @Controller
@@ -23,6 +24,21 @@ import javax.servlet.http.HttpServletRequest;
 public class ThymeleafController {
 
     private final ArticleService articleService;
+
+    private final List<TagDto> mockTags = List.of(
+            new TagDto("foo"),
+            new TagDto("bar"),
+            new TagDto("hotshit"),
+            new TagDto("trending"),
+            new TagDto("canyoureadthis"),
+            new TagDto("42"),
+            new TagDto("whathaveyoudone"),
+            new TagDto("neverregret"),
+            new TagDto("canttouchdis"),
+            new TagDto("livelovelaugh"),
+            new TagDto("weed")
+            );
+
 
     @GetMapping("/")
     public String blog() {
@@ -33,6 +49,7 @@ public class ThymeleafController {
     public String blog(Model model) {
         model.addAttribute("articles", articleService.getAll());
         model.addAttribute("article", new ArticleDto());    // initialize attribute for post
+        model.addAttribute("allTags", mockTags);
         return "blog";
     }
 
