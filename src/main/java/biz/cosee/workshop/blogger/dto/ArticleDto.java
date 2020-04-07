@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.Instant;
+
 @Getter
 @Setter
 @Builder
@@ -21,4 +23,6 @@ public class ArticleDto {
 
     private String title;
     private String content;
+
+    private String lastUpdate;
 }

@@ -24,27 +24,38 @@
 
     <hr/>
 
-    <div th:each="article : ${articles}">
-        <h3 th:text="${article.title}"></h3>
-        <div th:text="${article.content}"></div>
-        <form action="#" th:action="@{'/blog/{id}'(id=${article.id})}" th:method="post">
-            <button type="submit" class="btn-sm btn-danger">Delete</button>
-        </form>
-        <hr/>
+    <div class="container">
+        <div th:each="article : ${articles}">
+            <div class="row">
+                <div class="col-9">
+                    <h3 class="h3 d-inline-block" th:text="${article.title}"></h3>
+                    <span class="badge badge-secondary align-top" th:text="${article.lastUpdate}"></span>
+                </div>
+                <div class="col-3 text-right">
+                    <form action="#" th:action="@{'/blog/{id}'(id=${article.id})}" th:method="post">
+                        <button type="submit" class="btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row col-12" th:text="${article.content}"></div>
+            <hr/>
+        </div>
     </div>
 
-    <h3>Write a new blog post</h3>
-    <form action="#" th:action="@{/blog}" th:object="${article}" th:method="post">
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input id="title" type="text" class="form-control" th:field="*{title}"/>
-        </div>
-        <div class="form-group">
-            <label for="content">Content</label>
-            <textarea rows="10" id="content" class="form-control" th:field="*{content}"></textarea>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Submit"/>
-    </form>
+    <div>
+        <h3>Write a new blog post</h3>
+        <form action="#" th:action="@{/blog}" th:object="${article}" th:method="post">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input id="title" type="text" class="form-control" th:field="*{title}"/>
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea rows="10" id="content" class="form-control" th:field="*{content}"></textarea>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Submit"/>
+        </form>
+    </div>
 
 </main>
 <!-- /.container -->

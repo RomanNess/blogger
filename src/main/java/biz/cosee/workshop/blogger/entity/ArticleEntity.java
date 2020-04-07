@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -20,4 +21,6 @@ public class ArticleEntity {
 
     private String title;
     private String content;
+
+    private Instant lastUpdate;
 }
