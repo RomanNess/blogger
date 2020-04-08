@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.unbescape.html.HtmlEscape;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Secured("ROLE_USER")
@@ -47,11 +44,11 @@ public class BlogController {
     }
 
     @GetMapping("/blog")
-    public String blog(@RequestParam(value = "tag", required = false) String tagName, Model model) {
+    public String blog(Model model, @RequestParam(value = "activeTag", required = false, defaultValue = "") String activeTag) {
         model.addAttribute("articles", articleService.getAll());
         model.addAttribute("newArticle", new ArticleDto());    // initialize attribute for post
         model.addAttribute("allTags", mockTags);
-        model.addAttribute("activeTag", tagName);
+        model.addAttribute("activeTag", activeTag);
         return "blog";
     }
 

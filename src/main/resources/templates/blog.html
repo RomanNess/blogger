@@ -58,10 +58,8 @@
 
             <div th:each="tag : ${allTags}">
                 <div style="display: inline; float: left; margin: 3px;">
-                    <a th:href="@{/blog(tag=${tag.tagName})}">
-                        <button class="btn-xsm btn-dark align-top" type="submit" th:if="${activeTag != tag.tagName}" th:text="${tag.tagName}"></button>
-                        <button class="btn-xsm btn-info align-top" type="submit" th:if="${activeTag == tag.tagName}" th:text="${tag.tagName}"></button>
-                    </a>
+                    <a th:if="${activeTag != tag.tagName}" class="btn-xsm btn-dark align-top" th:href="@{/blog(activeTag=${tag.tagName})}" th:text="${tag.tagName}"></a>
+                    <a th:if="${activeTag == tag.tagName}" class="btn-xsm btn-info align-top" th:href="@{/blog(activeTag=${tag.tagName})}" th:text="${tag.tagName}"></a>
                 </div>
             </div>
 
