@@ -36,7 +36,7 @@ public class BlogController {
             new TagDto("canttouchdis"),
             new TagDto("livelovelaugh"),
             new TagDto("weed")
-            );
+    );
 
     @GetMapping("/")
     public String blog() {
