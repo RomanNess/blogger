@@ -69,7 +69,7 @@ class BlogControllerMockMvcTest extends AbstractMockMvcTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("blog"))
                 .andExpect(model().attribute("articles", hasSize(3)))
-                .andExpect(model().attribute("articles", hasItem(equalTo(new ArticleDto(1L, "The title", "The content.", NOW.toString())))));
+                .andExpect(model().attribute("articles", hasItem(equalTo(new ArticleDto(102L, "The title", "The content.", NOW.toString())))));
     }
 
     @Test

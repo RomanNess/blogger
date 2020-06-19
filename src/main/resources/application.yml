@@ -4,6 +4,9 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    username: ${POSTGRES_USERNAME:postgres}
-    password: ${POSTGRES_PASSWORD:postgres}
+    username: ${POSTGRES_USERNAME:blogger}
+    password: ${POSTGRES_PASSWORD:postgres4all}
     url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DATABASE:blogger}
+    # initialize data
+    data: classpath:sql/users.sql
+    initialization-mode: always
