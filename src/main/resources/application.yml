@@ -10,3 +10,11 @@ spring:
     # initialize data
     data: classpath:sql/users.sql
     initialization-mode: always
+
+  # sessions backed by database
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+      flush-mode: immediate
+      save-mode: always

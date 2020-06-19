@@ -1,6 +1,5 @@
 package biz.cosee.workshop.blogger.security;
 
-import biz.cosee.workshop.blogger.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
