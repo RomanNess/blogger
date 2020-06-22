@@ -1,6 +1,6 @@
 version: '3'
 services:
-  database:
+  blogger-db:
     image: postgres:12
     ports:
       - 5432:5432
@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: blogger
       POSTGRES_DB: blogger
     volumes:
-    - postgres12-data:/var/lib/postgresql/data/
+    - blogger-db-data:/var/lib/postgresql/data/
 
 volumes:
-  postgres12-data:
+  blogger-db-data:
